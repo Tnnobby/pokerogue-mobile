@@ -1,12 +1,15 @@
 import { useIsLandscape } from "@/hooks/useIsLandscape";
 import { SafeAreaWebView } from "./SafeAreaWebView";
 import { Colors } from "@/constants/Colors";
-import { View } from "react-native";
-import { useLocalSearchParams } from "expo-router";
+import { Text, TouchableOpacity, View } from "react-native";
+import { router, useLocalSearchParams } from "expo-router";
+import { Ionicons } from "@expo/vector-icons";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 export const PokedexView = () => {
   const landscape = useIsLandscape();
   const params = useLocalSearchParams();
+  const insets = useSafeAreaInsets();
   console.log(params);
   const url = new URLSearchParams();
   if (params) {
@@ -18,15 +21,37 @@ export const PokedexView = () => {
   console.log(uri);
 
   return (
-    <SafeAreaWebView
-      safe={!landscape}
-      source={{
-        uri,
-      }}
-      style={{ backgroundColor: Colors.background }}
-      renderLoading={() => {
-        return <View style={{ flex: 1, backgroundColor: Colors.background }} />;
-      }}
-    />
+    <>
+      <TouchableOpacity
+        style={{
+          borderRadius: 100,
+          height: 50,
+          width: 50,
+          position: "absolute",
+          bottom: 10,
+          left: 10,
+          flexDirection: "column",
+          justifyContent: "center",
+          alignItems: "center",
+          zIndex: 10,
+          backgroundColor: "red",
+        }}
+        onPress={() => router.back()}
+      >
+        <Ionicons name="arrow-back" color={"white"} size={16} />
+      </TouchableOpacity>
+      <SafeAreaWebView
+        safe={!landscape}
+        source={{
+          uri,
+        }}
+        style={{ backgroundColor: Colors.background }}
+        renderLoading={() => {
+          return (
+            <View style={{ flex: 1, backgroundColor: Colors.background }} />
+          );
+        }}
+      />
+    </>
   );
 };
