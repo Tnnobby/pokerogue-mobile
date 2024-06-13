@@ -1,18 +1,15 @@
 import {
   ListRenderItem,
   Pressable,
-  SafeAreaView,
   Text,
   TouchableOpacity,
   View,
-  useWindowDimensions,
 } from "react-native";
 import { GameInfo, PokemonInfo } from "./types";
 import Animated, {
   FadeIn,
   FadeOut,
   SlideInLeft,
-  SlideInRight,
   SlideOutLeft,
 } from "react-native-reanimated";
 import {
@@ -48,7 +45,7 @@ export const PokedexActionMenu = ({
         width: number,
         height: number,
         pageX: number,
-        pageY: number
+        pageY: number,
       ]
     >();
   const renderPokemon: ListRenderItem<PokemonInfo> = ({ item }) => {
@@ -132,7 +129,7 @@ export const PokedexActionMenu = ({
                     onPress={() => navigateToBiomePokedexPage(gameInfo.biome)}
                   >
                     <Text style={{ color: "white", fontSize: 16 }}>
-                      {gameInfo.biome || 'Biomes'}
+                      {gameInfo.biome || "Biomes"}
                     </Text>
                     <Ionicons name="arrow-forward" size={16} color="white" />
                   </TouchableOpacity>

@@ -52,9 +52,22 @@ export const usePokedex = () => {
   };
 
   const navigateToBiomePokedexPage = (biome: string) => {
+    let biomeFilter = "Biome:";
+
     const params = new URLSearchParams();
     params.append("table", "locationsTable");
-    biome && params.append("filter", `Biome:${biome}`);
+
+    // Handle cases where display name and dex name are different
+    switch (biome) {
+      case "Grassy Field":
+        biomeFilter += "Grass";
+        break;
+      default:
+        biomeFilter += biome;
+        break;
+    }
+
+    biome && params.append("filter", biomeFilter);
     router.push(`${BASE_URL}?${params.toString()}`);
   };
 
