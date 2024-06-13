@@ -1,11 +1,8 @@
 import { SafeAreaProvider } from "react-native-safe-area-context";
 
 import { Game } from "@/components/Game";
+import { Swipeable } from "react-native-gesture-handler";
 
 export default function Index() {
-  return (
-    <SafeAreaProvider style={{ flex: 1, backgroundColor: "#484050" }}>
-      <Game />
-    </SafeAreaProvider>
-  );
+  return <Game />;
 }
